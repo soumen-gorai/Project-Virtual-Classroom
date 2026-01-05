@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Authentication Fix</title>
+</head>
+<body>
+    <h1>Testing HOD Dashboard Authentication Fix</h1>
+    <p>This is a test page to verify the authentication fixes.</p>
+    
+    <script>
+        // Test the authentication check function
+        function testAuthCheck() {
+            console.log("Testing authentication check...");
+            
+            // Simulate a logged in HOD user
+            const testUser = {
+                "_id": "test123",
+                "name": "Dr. Test User",
+                "email": "test@educonnect.com",
+                "role": "hod",
+                "department": "Computer Science",
+                "isActive": true
+            };
+            
+            localStorage.setItem('authToken', 'test-token');
+            localStorage.setItem('currentUser', JSON.stringify(testUser));
+            
+            console.log("Test user data stored in localStorage");
+            
+            // Try to load the user data
+            try {
+                const currentUser = localStorage.getItem('currentUser');
+                if (currentUser) {
+                    const user = JSON.parse(currentUser);
+                    console.log("Loaded user:", user);
+                    
+                    if (user.role === 'hod') {
+                        console.log("Authentication successful - User is HOD");
+                    } else {
+                        console.log("Authentication failed - User is not HOD");
+                    }
+                } else {
+                    console.log("No user data found");
+                }
+            } catch (error) {
+                console.error("Error parsing user data:", error);
+            }
+        }
+        
+        // Run the test
+        testAuthCheck();
+    </script>
+</body>
+</html>

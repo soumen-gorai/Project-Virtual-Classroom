@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Faculty API</title>
+</head>
+<body>
+    <h1>Test Faculty API</h1>
+    <button onclick="testFacultyAPI()">Test Faculty API</button>
+    <div id="result"></div>
+
+    <script>
+        function testFacultyAPI() {
+            const authToken = localStorage.getItem('authToken');
+            const currentUser = localStorage.getItem('currentUser');
+            
+            if (!authToken || !currentUser) {
+                document.getElementById('result').innerHTML = '<p>No auth token or user data found</p>';
+                return;
+            }
+            
+            try {
+                const user = JSON.parse(currentUser);
+                document.getElementById('result').innerHTML = '<p>User role: ' + user.role + '</p>';
+                
+                if (user.role !== 'hod') {
+                    document.getElementById('result').innerHTML += '<p>User is not an HOD</p>';
+                    return;
+                }
+                
+                fetch('http://localhost:5002/api/teacher/faculty', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('result').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                })
+                .catch(error => {
+                    document.getElementById('result').innerHTML = '<p>Error: ' + error.message + '</p>';
+                });
+            } catch (error) {
+                document.getElementById('result').innerHTML = '<p>Error parsing user data: ' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>

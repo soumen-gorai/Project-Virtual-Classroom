@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Faculty Filter</title>
+</head>
+<body>
+    <h1>Debug Faculty Filter</h1>
+    <button onclick="debugFilter()">Debug Filter</button>
+    <div id="result"></div>
+
+    <script>
+        // Mock hodData for testing
+        const hodData = {
+            department: "Computer Engineering",
+            faculty: [
+                { id: "fac001", name: "Prof. Amit Patel", position: "Senior Professor", specialization: "Data Structures", department: "Computer Engineering", courses: 3, email: "amit.patel@educonnect.edu", status: "Active" },
+                { id: "fac002", name: "Dr. Neha Sharma", position: "Associate Professor", specialization: "Algorithms", department: "Computer Engineering", courses: 2, email: "neha.sharma@educonnect.edu", status: "Active" },
+                { id: "fac003", name: "Prof. Rohan Kumar", position: "Assistant Professor", specialization: "Database Systems", department: "Computer Engineering", courses: 2, email: "rohan.kumar@educonnect.edu", status: "Active" },
+                { id: "fac004", name: "Dr. Pooja Verma", position: "Lecturer", specialization: "Software Engineering", department: "Computer Engineering", courses: 1, email: "pooja.verma@educonnect.edu", status: "Active" }
+            ]
+        };
+
+        function filterFacultyByDepartment(department) {
+            console.log("Filtering by department:", department);
+            console.log("Available faculty:", hodData.faculty);
+            
+            // Filter the static faculty data to show only faculty from the same department
+            const filteredFaculty = hodData.faculty.filter(faculty => {
+                console.log("Checking faculty:", faculty.name, "department:", faculty.department, "against:", department);
+                return faculty.department === department;
+            });
+            
+            console.log("Filtered faculty:", filteredFaculty);
+            return filteredFaculty;
+        }
+
+        function debugFilter() {
+            const department = "Computer Engineering";
+            const result = filterFacultyByDepartment(department);
+            
+            document.getElementById('result').innerHTML = `
+                <h2>Debug Results</h2>
+                <p>Department: ${department}</p>
+                <p>Filtered Faculty Count: ${result.length}</p>
+                <pre>${JSON.stringify(result, null, 2)}</pre>
+            `;
+        }
+    </script>
+</body>
+</html>
