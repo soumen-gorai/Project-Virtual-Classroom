@@ -518,22 +518,57 @@ Example sections:
 
 ### Login Page
 ```md
-![Login Page](screenshots/login.png)
+![Login page  ](https://github.com/user-attachments/assets/670e09f1-4740-4af6-8d1f-0e59976f5137)
+
+```
+
+### Registration Page
+```md
+![Registration page  ](https://github.com/user-attachments/assets/8cbf58df-70de-4ac8-951e-d24111e16363)
+
+```
+
+### Front page 
+```md
+![front side](https://github.com/user-attachments/assets/6001942c-8e68-45a2-9b1d-73128d08522e)
+
 ```
 
 ### Teacher Dashboard
 ```md
-![Teacher Dashboard](screenshots/teacher-dashboard.png)
+![Teacher](https://github.com/user-attachments/assets/f66637db-5e8e-4e24-a461-baaedcd164e1)
+
+```
+
+### Hod Dashboard
+```md
+![Hod](https://github.com/user-attachments/assets/b3890b44-04a2-46e3-98a5-48b00cc787c8)
+
+```
+
+### Admin Dashboard
+```md
+![Admin](https://github.com/user-attachments/assets/a366d523-c80a-4f44-91da-c7a2a177c451)
+
 ```
 
 ### Face Recognition Attendance
 ```md
-![Face Recognition Attendance](screenshots/attendance.png)
+![Attendance verification system ](https://github.com/user-attachments/assets/309157e6-ff62-4ac8-a318-cdc61401d2ce)
+![Live Attendance](https://github.com/user-attachments/assets/ca4b937b-4858-49a1-b6ab-add023531bbe)
+
 ```
 
 ### Attendance Report
 ```md
-![Attendance Report](screenshots/report.png)
+![Take The Attendance And Update on Database](https://github.com/user-attachments/assets/e8ab349f-8756-4bb3-b333-616140325f55)
+
+```
+
+### Performance Prediction & suggestion
+```md
+![Prediction model  ](https://github.com/user-attachments/assets/423973f3-3ac6-43c2-8338-55618fa41927)
+
 ```
 
 ---
@@ -575,20 +610,6 @@ It is especially useful for institutions that want to modernize classroom operat
 
 ---
 
-## 📝 Resume / Interview Description
-
-You can use this in your resume:
-
-> **Developed a Virtual Classroom System integrated with Face Recognition Attendance using Node.js, MongoDB, Python, and OpenCV. Implemented automated attendance marking, student management, class handling, and machine learning-based student performance prediction.**
-
----
-
-## 🎤 Viva Explanation (Short)
-
-If someone asks **“Explain your project”**, say:
-
-> **“My project is a Virtual Classroom System integrated with Face Recognition Attendance. It helps manage classes, students, and attendance digitally. The main feature is that attendance is automatically marked using face recognition, and the data is synced to the main classroom platform. I also included a machine learning module to predict student performance.”**
-
 ---
 
 ## 🤝 Contribution
@@ -612,8 +633,8 @@ This project is developed for **educational and academic purposes**.
 ## 👨‍💻 Author
 
 **Your Name**
-- GitHub: [your-github-link](https://github.com/your-username)
-- LinkedIn: [your-linkedin-link](https://linkedin.com/in/your-profile)
+- GitHub: [your-github-link](https://github.com/soumen-gorai)
+- LinkedIn: [your-linkedin-link](https://www.linkedin.com/in/soumen-gorai-a726a924a/)
 
 ---
 
