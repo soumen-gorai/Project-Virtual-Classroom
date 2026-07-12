@@ -1,12 +1,14 @@
 #📋 TABLE OF CONTENTS
+
 Project Overview
-Working Flow — All Dashboards
-Student Dashboard Flow
-Teacher Dashboard Flow
-HOD Dashboard Flow
-Principal Dashboard Flow
-Admin Dashboard Flow
-Meeting Room Flow
+
+.Working Flow — All Dashboards
+.Student Dashboard Flow
+.Teacher Dashboard Flow
+.HOD Dashboard Flow
+.Principal Dashboard Flow
+.Admin Dashboard Flow
+.Meeting Room Flow
 Q&A — Frontend
 Q&A — Backend
 Q&A — Student Dashboard
@@ -218,55 +220,80 @@ This module handles login and access control.
 
 ---
 
-🎓 Student Dashboard Flow
+## 🎓 Student Dashboard Flow
 The student dashboard is the learning hub for every enrolled student. Here is the complete step-by-step flow:
 
 Step 1 — Login
 
-Student goes to the login page, enters email, password, and selects role "Student"
-Backend checks the email and password, matches the role from MongoDB
-If valid, a JWT token is generated and stored in localStorage
-Student is redirected to student-dashboard.html
+.Student goes to the login page, enters email, password, and selects role "Student"
+
+.Backend checks the email and password, matches the role from MongoDB
+
+.If valid, a JWT token is generated and stored in localStorage
+
+.Student is redirected to student-dashboard.html
+
 Step 2 — Dashboard Overview (Stats)
 
-On page load, frontend sends API calls to backend with the JWT token
-4 stat boxes are loaded: Enrolled Courses, Attendance Rate, Pending Assignments, Average Grade
-Pending assignments count is calculated by checking if a submission exists for each assignment
+.On page load, frontend sends API calls to backend with the JWT token
+
+.4 stat boxes are loaded: Enrolled Courses, Attendance Rate, Pending Assignments, Average Grade
+ Pending assignments count is calculated by checking if a submission exists for each assignment
+ 
 Step 3 — Upcoming Classes
 
-Frontend polls the backend every 5 seconds for class data
-If teacher has started a meeting (meetingLink exists in database), a "Join" button appears automatically — no page refresh needed
-If class is scheduled but teacher hasn't started, it shows "Waiting for teacher" (gray, disabled)
-If meeting has ended, it shows "Class Completed" (green, disabled)
+.Frontend polls the backend every 5 seconds for class data
+
+.If teacher has started a meeting (meetingLink exists in database), a "Join" button appears automatically — no page refresh needed
+
+.If class is scheduled but teacher hasn't started, it shows "Waiting for teacher" (gray, disabled)
+
+.If meeting has ended, it shows "Class Completed" (green, disabled)
+
 Step 4 — Assignments
 
 "Pending" tab: Shows assignments that have no submission in database
+
 "Completed" tab: Shows assignments where a submission record exists
+
 Student clicks "Submit" → file upload modal opens → file sent to backend → submission saved
+
 Pending count updates automatically after submission
+
 Step 5 — Grades
 
-Student enters semester CGPA values (0–10 scale) in input boxes
-Backend calculates overall GPA as average of all filled semesters
-Chart.js draws an animated line graph showing CGPA trend
-A predicted next semester CGPA is shown (dashed purple line) using linear regression
+.Student enters semester CGPA values (0–10 scale) in input boxes
+
+.Backend calculates overall GPA as average of all filled semesters
+
+.Chart.js draws an animated line graph showing CGPA trend
+
+.A predicted next semester CGPA is shown (dashed purple line) using linear regression
+
 Step 6 — Resources
 
-Teacher-uploaded files appear here
-PDFs open with PDF.js (full page viewer), Word files with Mammoth.js, Excel with SheetJS
-Student can also download any file
+.Teacher-uploaded files appear here
+
+.PDFs open with PDF.js (full page viewer), Word files with Mammoth.js, Excel with SheetJS
+
+.Student can also download any file
+
 Step 7 — Messages
 
-Student sees inbox messages from teachers, HODs, and the system
-Can reply to messages
-Meeting notifications also arrive here when teacher starts a class
+.Student sees inbox messages from teachers, HODs, and the system
+
+.Can reply to messages
+
+.Meeting notifications also arrive here when teacher starts a class
+
 Step 8 — Attendance
 
-Shows overall attendance percentage
+.Shows overall attendance percentage
+
 Per-class breakdown with status (Excellent / Good / Needs Improvement)
 ---
 
-👨‍🏫 Teacher Dashboard Flow
+## 👨‍🏫 Teacher Dashboard Flow
 
 The teacher dashboard gives faculty full control over classes, students, assignments, and resources.
 
