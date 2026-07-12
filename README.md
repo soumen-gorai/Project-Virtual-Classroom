@@ -264,7 +264,10 @@ Step 8 — Attendance
 
 Shows overall attendance percentage
 Per-class breakdown with status (Excellent / Good / Needs Improvement)
+---
+
 👨‍🏫 Teacher Dashboard Flow
+
 The teacher dashboard gives faculty full control over classes, students, assignments, and resources.
 
 Step 1 — Login
@@ -312,7 +315,10 @@ Teacher views student performance cards with year-wise CGPA
 At-risk students (CGPA < 7.5) are highlighted in red
 Safe students (CGPA > 8.0) are highlighted in green
 Prediction model shows expected performance
+---
+
 🏛️ HOD Dashboard Flow
+
 The HOD (Head of Department) has all the teacher's powers plus department-level management.
 
 Step 1 — Login
@@ -357,7 +363,9 @@ Step 8 — Event Requests
 HOD submits event requests to Principal
 Principal approves/declines
 HOD gets a notification about the decision
+---
 👨‍💼 Principal Dashboard Flow
+
 The Principal (Managing Authority) has full oversight of the entire institution.
 
 Step 1 — Login
@@ -399,7 +407,9 @@ Step 8 — Event Approvals
 HODs submit event requests
 Principal sees all pending requests with Approve/Decline buttons
 On approval, HOD gets a notification automatically
+---
 🔧 Admin Dashboard Flow
+
 The Admin is the technical system manager — they set up the structure that everyone else uses.
 
 Step 1 — Login
@@ -437,7 +447,9 @@ Step 7 — Reports
 
 System-wide performance reports
 Export functionality for data analysis
+---
 🎥 Meeting Room Flow
+
 The meeting room is EduConnect's built-in virtual classroom — designed to work exactly like Google Meet.
 
 Why Jitsi was chosen — explained simply: Jitsi Meet is a free, open-source video conferencing platform. Instead of building video/audio from scratch (which requires complex WebRTC servers, STUN/TURN infrastructure, and months of development), we embed Jitsi's public server inside our own meeting room page. This gives us:
