@@ -3,12 +3,19 @@
 Project Overview
 
 .Working Flow — All Dashboards
+
 .Student Dashboard Flow
+
 .Teacher Dashboard Flow
+
 .HOD Dashboard Flow
+
 .Principal Dashboard Flow
+
 .Admin Dashboard Flow
+
 .Meeting Room Flow
+
 Q&A — Frontend
 Q&A — Backend
 Q&A — Student Dashboard
@@ -569,75 +576,108 @@ The meeting room is EduConnect's built-in virtual classroom — designed to work
 
 Why Jitsi was chosen — explained simply: Jitsi Meet is a free, open-source video conferencing platform. Instead of building video/audio from scratch (which requires complex WebRTC servers, STUN/TURN infrastructure, and months of development), we embed Jitsi's public server inside our own meeting room page. This gives us:
 
-Free HD video/audio with zero cost
-Global infrastructure that works from any country
-WebRTC peer-to-peer connections (no server bottleneck)
-Built-in screen share, raise hand, mic/camera controls
-We only had to build the custom approval system and UI around it
+.Free HD video/audio with zero cost
+
+.Global infrastructure that works from any country
+
+.WebRTC peer-to-peer connections (no server bottleneck)
+
+.Built-in screen share, raise hand, mic/camera controls
+
+.We only had to build the custom approval system and UI around it
 
 ##Step 1 — Teacher Creates Meeting
 
 .Teacher clicks "Start Class" on the subject card
+
 .Backend generates a unique room code like abc-defg-hij
+
 .A full meeting link is built: https://educonnect-2025.netlify.app/meeting-room.html?room=abc-defg-hij
+
 .This link is saved to the Class record in MongoDB
+
 .All enrolled students get a message notification
 
 ##Step 2 — Student Dashboard Detects Meeting
 
 .Student dashboard polls the backend every 5 seconds
+
 .When meetingLink is found in the class record, "Join" button appears automatically
+
 .No page refresh needed — it's completely automatic
 
 ##Step 3 — Student Goes to Lobby
 
 .Student clicks "Join" → redirected to meeting-room.html?room=abc-defg-hij
+
 .A lobby screen shows: camera preview, mic/camera toggle, "Join Now" button
+
 .Student sees themselves before entering
 
 ##Step 4 — Student Sends Join Request
 
 .Student clicks "Join Now" → backend API call adds student to pendingApprovals[]
+
 .Student sees "Waiting for Teacher Approval" screen
+
 .Frontend polls every 3 seconds to check if approval status changed
 
 ##Step 5 — Teacher Approves
 
 .Teacher's meeting room shows a red badge on Participants icon (count of pending students)
+
 .Teacher opens Participants panel → sees student name with "Accept" / "Decline" buttons
+
 .Teacher clicks "Accept" → backend sets student status to "accepted"
 
 ##Step 6 — Auto-Connect (The Key Fix)
 
 .After approving, teacher's Jitsi iframe automatically reloads after 1.5 seconds
+
 .This is the key fix for the "need to rejoin" problem — Jitsi uses WebRTC peer-to-peer connections. If host and student join at different times, they don't discover each other. 
+
 .By reloading the host's iframe at the same time as the student enters, both join the Jitsi room at the same moment, Jitsi detects both peers, and the video connection is established automatically.
+
 .Student enters the meeting room 2 seconds after approval
+
 .Total time from approval to video: ~4 seconds
 
 ##Step 7 — Inside the Meeting
 
 .Jitsi handles video/audio/screen share — all built in
+
 .Chat is stored in MongoDB, polled every 3 seconds
+
 .Participants list is polled every 5 seconds
+
 .Any teacher/HOD in the meeting can approve new join requests
 
 ##Step 8 — End Meeting
 
 .Teacher clicks "End" → confirmation dialog
+
 .Backend marks meeting as ended, sets isActive = false
+
 .3-Layer clearing system removes meeting link from all class records:
+  
   Layer 1: Clear by classId
+  
   Layer 2: Clear by matching meetingLink URL
+  
   Layer 3: Clear by room code pattern (regex)
+
 .All students' dashboards show "Class Completed" within 5–10 seconds
+
 .Old meeting link becomes invalid — cannot be used again
 
 ---
 
 ## Functionalities:
+
 - Recognizes registered students
+
 - Marks attendance only when confidence threshold is met
+
 - Stores attendance locally and syncs to main system
 
 The trained face recognition model uses an OpenCV LBPH face recognizer configuration saved as `trainer.yml`, confirming the project’s trained recognition pipeline. :contentReference[oaicite:4]{index=4}
