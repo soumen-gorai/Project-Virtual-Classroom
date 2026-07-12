@@ -1,4 +1,4 @@
-#📋 TABLE OF CONTENTS
+## 📋 TABLE OF CONTENTS
 
 Project Overview
 
@@ -223,7 +223,7 @@ This module handles login and access control.
 ## 🎓 Student Dashboard Flow
 The student dashboard is the learning hub for every enrolled student. Here is the complete step-by-step flow:
 
-Step 1 — Login
+##Step 1 — Login
 
 .Student goes to the login page, enters email, password, and selects role "Student"
 
@@ -233,14 +233,14 @@ Step 1 — Login
 
 .Student is redirected to student-dashboard.html
 
-Step 2 — Dashboard Overview (Stats)
+##Step 2 — Dashboard Overview (Stats)
 
 .On page load, frontend sends API calls to backend with the JWT token
 
 .4 stat boxes are loaded: Enrolled Courses, Attendance Rate, Pending Assignments, Average Grade
  Pending assignments count is calculated by checking if a submission exists for each assignment
  
-Step 3 — Upcoming Classes
+##Step 3 — Upcoming Classes
 
 .Frontend polls the backend every 5 seconds for class data
 
@@ -250,7 +250,7 @@ Step 3 — Upcoming Classes
 
 .If meeting has ended, it shows "Class Completed" (green, disabled)
 
-Step 4 — Assignments
+##Step 4 — Assignments
 
 "Pending" tab: Shows assignments that have no submission in database
 
@@ -260,7 +260,7 @@ Student clicks "Submit" → file upload modal opens → file sent to backend →
 
 Pending count updates automatically after submission
 
-Step 5 — Grades
+##Step 5 — Grades
 
 .Student enters semester CGPA values (0–10 scale) in input boxes
 
@@ -270,7 +270,7 @@ Step 5 — Grades
 
 .A predicted next semester CGPA is shown (dashed purple line) using linear regression
 
-Step 6 — Resources
+##Step 6 — Resources
 
 .Teacher-uploaded files appear here
 
@@ -278,7 +278,7 @@ Step 6 — Resources
 
 .Student can also download any file
 
-Step 7 — Messages
+##Step 7 — Messages
 
 .Student sees inbox messages from teachers, HODs, and the system
 
@@ -286,7 +286,7 @@ Step 7 — Messages
 
 .Meeting notifications also arrive here when teacher starts a class
 
-Step 8 — Attendance
+##Step 8 — Attendance
 
 .Shows overall attendance percentage
 
@@ -297,185 +297,273 @@ Per-class breakdown with status (Excellent / Good / Needs Improvement)
 
 The teacher dashboard gives faculty full control over classes, students, assignments, and resources.
 
-Step 1 — Login
+##Step 1 — Login
 
-Teacher logs in with role "Teacher"
-JWT token is stored with the teacher's ID and role
-Step 2 — Overview
+.Teacher logs in with role "Teacher"
 
-4 stat cards: Classes Teaching, Total Students, Pending Assignments, Class Attendance
+.JWT token is stored with the teacher's ID and role
+
+##Step 2 — Overview
+
+.4 stat cards: Classes Teaching, Total Students, Pending Assignments, Class Attendance
 "My Assigned Subjects" list shows all subjects HOD has assigned to this teacher
-Step 3 — Schedule a Class
 
-Teacher clicks "Update Mode" on a subject card
-A modal opens to select Virtual (with Date & Time) or Physical (with Room number)
-On saving, the class record in MongoDB is updated with mode, date, and time
-Students enrolled in that class receive a notification: "Your class is scheduled for [date] at [time]"
-Student dashboard immediately shows "Waiting for teacher" status
-Step 4 — Start a Meeting
+##Step 3 — Schedule a Class
 
-Teacher clicks "Start Class" button
-Backend creates a Meeting record in MongoDB with a unique room code (e.g., abc-defg-hij)
-A meeting link is saved to the Class record so student dashboard can detect it
-All students get a message notification with the meeting link
-Within 5 seconds, the "Join" button appears on every enrolled student's dashboard
-Step 5 — Inside the Meeting
+.Teacher clicks "Update Mode" on a subject card
 
-Teacher's Jitsi iframe loads automatically (no extra click needed)
-Students who click "Join" go to a lobby, then submit a join request
-Teacher sees a red badge on the Participants panel showing how many students are waiting
-Teacher clicks "Accept" → student automatically joins (no rejoin needed)
-Step 6 — End Meeting
+.A modal opens to select Virtual (with Date & Time) or Physical (with Room number)
 
-Teacher clicks "End" button → confirms in modal
-Backend sets meeting status to "ended"
-Meeting link is cleared from database (3 layers of clearing)
-All students' dashboards show "Class Completed" within 5–10 seconds
-Step 7 — Assignments & Grading
+.On saving, the class record in MongoDB is updated with mode, date, and time
 
-Teacher creates assignments with title, description, deadline, max marks, and optional file
-Students submit files, teacher sees all submissions
-Teacher gives marks → grade saved to Submission record → student's "Completed" tab updates
-Step 8 — Student Analytics
+.Students enrolled in that class receive a notification: "Your class is scheduled for [date] at [time]"
 
-Teacher views student performance cards with year-wise CGPA
-At-risk students (CGPA < 7.5) are highlighted in red
-Safe students (CGPA > 8.0) are highlighted in green
-Prediction model shows expected performance
+.Student dashboard immediately shows "Waiting for teacher" status
+
+##Step 4 — Start a Meeting
+
+.Teacher clicks "Start Class" button
+
+.Backend creates a Meeting record in MongoDB with a unique room code (e.g., abc-defg-hij)
+
+.A meeting link is saved to the Class record so student dashboard can detect it
+
+.All students get a message notification with the meeting link
+ Within 5 seconds, the "Join" button appears on every enrolled student's dashboard
+ 
+## Step 5 — Inside the Meeting
+
+.Teacher's Jitsi iframe loads automatically (no extra click needed)
+
+.Students who click "Join" go to a lobby, then submit a join request
+
+.Teacher sees a red badge on the Participants panel showing how many students are waiting
+
+.Teacher clicks "Accept" → student automatically joins (no rejoin needed)
+
+##Step 6 — End Meeting
+
+.Teacher clicks "End" button → confirms in modal
+
+.Backend sets meeting status to "ended"
+
+.Meeting link is cleared from database (3 layers of clearing)
+
+.All students' dashboards show "Class Completed" within 5–10 seconds
+
+## Step 7 — Assignments & Grading
+
+.Teacher creates assignments with title, description, deadline, max marks, and optional file
+
+.Students submit files, teacher sees all submissions
+
+.Teacher gives marks → grade saved to Submission record → student's "Completed" tab updates
+
+##Step 8 — Student Analytics
+
+.Teacher views student performance cards with year-wise CGPA
+
+.At-risk students (CGPA < 7.5) are highlighted in red
+
+.Safe students (CGPA > 8.0) are highlighted in green
+
+.Prediction model shows expected performance
 ---
 
-🏛️ HOD Dashboard Flow
+## 🏛️ HOD Dashboard Flow
 
 The HOD (Head of Department) has all the teacher's powers plus department-level management.
 
-Step 1 — Login
+##Step 1 — Login
 
-HOD logs in with role "HOD"
-HOD has both teacher-level access and department-level access
-Step 2 — Department Overview
+.HOD logs in with role "HOD"
 
-4 stat cards: Faculty Members, Active Courses, Department Students, Avg Department CGPA
-"My Assigned Subjects" — HOD can also teach classes directly (same flow as teacher)
-Department activity feed shows recent actions
-Step 3 — Faculty Management
+.HOD has both teacher-level access and department-level access
 
-HOD views all teachers in the department
-Can assign subjects to specific teachers
-Can view teacher performance and workload
-Step 4 — Student Performance Monitoring
+##Step 2 — Department Overview
 
-HOD sees all department students with year-wise CGPA
-Color-coded: red = at-risk (CGPA < 7.5), green = safe (CGPA > 8.0)
-Clicking "View" opens a beautiful purple gradient student detail card with:
-Year 1 CGPA (average of Sem 1 + Sem 2)
-Year 2 CGPA (average of Sem 3 + Sem 4)
-Year 3 CGPA (average of Sem 5 + Sem 6)
-Year 4 CGPA (average of Sem 7 + Sem 8)
-Animated prediction line (next year's expected CGPA)
-Step 5 — Hosting Department Meetings
+.4 stat cards: Faculty Members, Active Courses, Department Students, Avg Department CGPA
 
-HOD can start meetings and invite all department teachers
-HOD can also approve student join requests (same as teacher)
-HOD can end meetings for the entire department
-Step 6 — Assignments
+."My Assigned Subjects" — HOD can also teach classes directly (same flow as teacher)
 
-HOD creates department-wide assignments visible to all enrolled students
-Can view and grade all student submissions
-Step 7 — Announcements from Principal
+.Department activity feed shows recent actions
 
-HOD receives and can view all Principal announcements
-Filter by priority (High / Medium / Low)
-Step 8 — Event Requests
+##Step 3 — Faculty Management
 
-HOD submits event requests to Principal
-Principal approves/declines
-HOD gets a notification about the decision
+.HOD views all teachers in the department
+
+.Can assign subjects to specific teachers
+
+.Can view teacher performance and workload
+
+##Step 4 — Student Performance Monitoring
+
+.HOD sees all department students with year-wise CGPA
+
+.Color-coded: red = at-risk (CGPA < 7.5), green = safe (CGPA > 8.0)
+
+.Clicking "View" opens a beautiful purple gradient student detail card with:
+  Year 1 CGPA (average of Sem 1 + Sem 2)
+  Year 2 CGPA (average of Sem 3 + Sem 4)
+  Year 3 CGPA (average of Sem 5 + Sem 6)
+  Year 4 CGPA (average of Sem 7 + Sem 8)
+
+.Animated prediction line (next year's expected CGPA)
+
+##Step 5 — Hosting Department Meetings
+
+.HOD can start meetings and invite all department teachers
+
+.HOD can also approve student join requests (same as teacher)
+
+.HOD can end meetings for the entire department
+
+##Step 6 — Assignments
+
+.HOD creates department-wide assignments visible to all enrolled students
+
+.Can view and grade all student submissions
+
+##Step 7 — Announcements from Principal
+
+.HOD receives and can view all Principal announcements
+
+.Filter by priority (High / Medium / Low)
+
+##Step 8 — Event Requests
+
+.HOD submits event requests to Principal
+
+.Principal approves/declines
+
+.HOD gets a notification about the decision
 ---
-👨‍💼 Principal Dashboard Flow
+## 👨‍💼 Principal Dashboard Flow
 
 The Principal (Managing Authority) has full oversight of the entire institution.
 
-Step 1 — Login
+##Step 1 — Login
 
-Principal logs in with role "managing_authority"
-Has the highest access level (except system config which is admin-only)
-Step 2 — Institutional Overview
+.Principal logs in with role "managing_authority"
 
-4 stat cards: Total Students, Total Teachers, Total Departments, Average CGPA
-College Performance Overview: table showing each department's average CGPA
-Recent Activity feed: latest actions happening across the college
-Step 3 — Department Management
+.Has the highest access level (except system config which is admin-only)
 
-View all departments with HOD name, faculty count, student count, status
-Add new department: enters name, selects program (B.Tech / BCA etc.), creates HOD account
-HOD account is auto-created with login credentials instantly
-Edit department: can change HOD, update details
-Step 4 — Faculty Management
+##Step 2 — Institutional Overview
 
-View all faculty (teachers + HODs) college-wide with department info
-Add new teacher: name, department, email, password — account created instantly
-Direct message any teacher from this panel
-Step 5 — Student Monitoring
+.4 stat cards: Total Students, Total Teachers, Total Departments, Average CGPA
 
-Students grouped by department in colored collapsible boxes
-Each student row: Roll No., Name, Year 1–4 CGPA, Average CGPA, Status
-Export Report button downloads a CSV file of all student data
-Step 6 — Announcements
+.College Performance Overview: table showing each department's average CGPA
 
-Principal creates announcements that appear on ALL dashboards (students, teachers, HODs)
-Sets priority: High (red) / Medium (orange) / Low (green)
-Can edit and delete announcements anytime
-Step 7 — Meeting Room
+.Recent Activity feed: latest actions happening across the college
 
-Principal hosts meetings with all HODs simultaneously
-Meeting notification sent to every HOD in the system
-Step 8 — Event Approvals
+## Step 3 — Department Management
 
-HODs submit event requests
-Principal sees all pending requests with Approve/Decline buttons
-On approval, HOD gets a notification automatically
+.View all departments with HOD name, faculty count, student count, status
+
+.Add new department: enters name, selects program (B.Tech / BCA etc.), creates HOD account
+
+.HOD account is auto-created with login credentials instantly
+
+.Edit department: can change HOD, update details
+
+##Step 4 — Faculty Management
+
+.View all faculty (teachers + HODs) college-wide with department info
+
+.Add new teacher: name, department, email, password — account created instantly
+
+.Direct message any teacher from this panel
+
+##Step 5 — Student Monitoring
+
+.Students grouped by department in colored collapsible boxes
+
+.Each student row: Roll No., Name, Year 1–4 CGPA, Average CGPA, Status
+
+.Export Report button downloads a CSV file of all student data
+
+##Step 6 — Announcements
+
+.Principal creates announcements that appear on ALL dashboards (students, teachers, HODs)
+
+.Sets priority: High (red) / Medium (orange) / Low (green)
+
+.Can edit and delete announcements anytime
+##Step 7 — Meeting Room
+
+.Principal hosts meetings with all HODs simultaneously
+
+.Meeting notification sent to every HOD in the system
+
+##Step 8 — Event Approvals
+
+.HODs submit event requests
+
+.Principal sees all pending requests with Approve/Decline buttons
+
+.On approval, HOD gets a notification automatically
 ---
-🔧 Admin Dashboard Flow
+## 🔧 Admin Dashboard Flow
 
 The Admin is the technical system manager — they set up the structure that everyone else uses.
 
-Step 1 — Login
+##Step 1 — Login
 
-Admin logs in with role "admin"
-Has complete system access including all collections
-Step 2 — Programs Management
+.Admin logs in with role "admin"
 
-Admin creates academic programs (e.g., B.Tech, BCA, MCA)
-Sets program name, code, duration (years), total semesters
-Programs appear in all dropdowns across the system (e.g., Add Department, Add Student)
-Step 3 — Department Management
+.Has complete system access including all collections
 
-Admin can create and manage all departments
-Links each department to a program
-Assigns HOD to each department
-Step 4 — User Management
+##Step 2 — Programs Management
 
-Complete user table with filters by role and department
-Add User form: enters name, selects role, program, department, email, password
-Auto Roll Number: system automatically picks the next available roll number per program
-Example: If last B.Tech student is Roll 43, next one gets Roll 44
-Delete user with confirmation dialog
-Step 5 — Subjects Catalog
+.Admin creates academic programs (e.g., B.Tech, BCA, MCA)
 
-Admin creates the master subject list
-Links subjects to departments, programs, and semesters
-These subjects are then assigned to teachers by HODs
-Step 6 — Activity Logs
+.Sets program name, code, duration (years), total semesters
 
-Full system audit trail: every login, assignment creation, grade update, meeting start — all logged
-Filter by date range to track specific days
-Each log shows: User Name, Action, Description, IP Address, Status (success/failed)
-Step 7 — Reports
+.Programs appear in all dropdowns across the system (e.g., Add Department, Add Student)
 
-System-wide performance reports
-Export functionality for data analysis
+##Step 3 — Department Management
+
+.Admin can create and manage all departments
+
+.Links each department to a program
+
+.Assigns HOD to each department
+
+##Step 4 — User Management
+
+.Complete user table with filters by role and department
+
+.Add User form: enters name, selects role, program, department, email, password
+
+.Auto Roll Number: system automatically picks the next available roll number per program
+
+.Example: If last B.Tech student is Roll 43, next one gets Roll 44
+
+.Delete user with confirmation dialog
+
+##Step 5 — Subjects Catalog
+
+.Admin creates the master subject list
+
+.Links subjects to departments, programs, and semesters
+
+.These subjects are then assigned to teachers by HODs
+
+##Step 6 — Activity Logs
+
+.Full system audit trail: every login, assignment creation, grade update, meeting start — all logged
+
+.Filter by date range to track specific days
+
+.Each log shows: User Name, Action, Description, IP Address, Status (success/failed)
+
+##Step 7 — Reports
+
+.System-wide performance reports
+
+.Export functionality for data analysis
 ---
-🎥 Meeting Room Flow
+## 🎥 Meeting Room Flow
 
 The meeting room is EduConnect's built-in virtual classroom — designed to work exactly like Google Meet.
 
@@ -486,58 +574,68 @@ Global infrastructure that works from any country
 WebRTC peer-to-peer connections (no server bottleneck)
 Built-in screen share, raise hand, mic/camera controls
 We only had to build the custom approval system and UI around it
-Step 1 — Teacher Creates Meeting
 
-Teacher clicks "Start Class" on the subject card
-Backend generates a unique room code like abc-defg-hij
-A full meeting link is built: https://educonnect-2025.netlify.app/meeting-room.html?room=abc-defg-hij
-This link is saved to the Class record in MongoDB
-All enrolled students get a message notification
-Step 2 — Student Dashboard Detects Meeting
+##Step 1 — Teacher Creates Meeting
 
-Student dashboard polls the backend every 5 seconds
-When meetingLink is found in the class record, "Join" button appears automatically
-No page refresh needed — it's completely automatic
-Step 3 — Student Goes to Lobby
+.Teacher clicks "Start Class" on the subject card
+.Backend generates a unique room code like abc-defg-hij
+.A full meeting link is built: https://educonnect-2025.netlify.app/meeting-room.html?room=abc-defg-hij
+.This link is saved to the Class record in MongoDB
+.All enrolled students get a message notification
 
-Student clicks "Join" → redirected to meeting-room.html?room=abc-defg-hij
-A lobby screen shows: camera preview, mic/camera toggle, "Join Now" button
-Student sees themselves before entering
-Step 4 — Student Sends Join Request
+##Step 2 — Student Dashboard Detects Meeting
 
-Student clicks "Join Now" → backend API call adds student to pendingApprovals[]
-Student sees "Waiting for Teacher Approval" screen
-Frontend polls every 3 seconds to check if approval status changed
-Step 5 — Teacher Approves
+.Student dashboard polls the backend every 5 seconds
+.When meetingLink is found in the class record, "Join" button appears automatically
+.No page refresh needed — it's completely automatic
 
-Teacher's meeting room shows a red badge on Participants icon (count of pending students)
-Teacher opens Participants panel → sees student name with "Accept" / "Decline" buttons
-Teacher clicks "Accept" → backend sets student status to "accepted"
-Step 6 — Auto-Connect (The Key Fix)
+##Step 3 — Student Goes to Lobby
 
-After approving, teacher's Jitsi iframe automatically reloads after 1.5 seconds
-This is the key fix for the "need to rejoin" problem — Jitsi uses WebRTC peer-to-peer connections. If host and student join at different times, they don't discover each other. By reloading the host's iframe at the same time as the student enters, both join the Jitsi room at the same moment, Jitsi detects both peers, and the video connection is established automatically.
-Student enters the meeting room 2 seconds after approval
-Total time from approval to video: ~4 seconds
-Step 7 — Inside the Meeting
+.Student clicks "Join" → redirected to meeting-room.html?room=abc-defg-hij
+.A lobby screen shows: camera preview, mic/camera toggle, "Join Now" button
+.Student sees themselves before entering
 
-Jitsi handles video/audio/screen share — all built in
-Chat is stored in MongoDB, polled every 3 seconds
-Participants list is polled every 5 seconds
-Any teacher/HOD in the meeting can approve new join requests
-Step 8 — End Meeting
+##Step 4 — Student Sends Join Request
 
-Teacher clicks "End" → confirmation dialog
-Backend marks meeting as ended, sets isActive = false
-3-Layer clearing system removes meeting link from all class records:
-Layer 1: Clear by classId
-Layer 2: Clear by matching meetingLink URL
-Layer 3: Clear by room code pattern (regex)
-All students' dashboards show "Class Completed" within 5–10 seconds
-Old meeting link becomes invalid — cannot be used again
+.Student clicks "Join Now" → backend API call adds student to pendingApprovals[]
+.Student sees "Waiting for Teacher Approval" screen
+.Frontend polls every 3 seconds to check if approval status changed
 
+##Step 5 — Teacher Approves
 
-### Functionalities:
+.Teacher's meeting room shows a red badge on Participants icon (count of pending students)
+.Teacher opens Participants panel → sees student name with "Accept" / "Decline" buttons
+.Teacher clicks "Accept" → backend sets student status to "accepted"
+
+##Step 6 — Auto-Connect (The Key Fix)
+
+.After approving, teacher's Jitsi iframe automatically reloads after 1.5 seconds
+.This is the key fix for the "need to rejoin" problem — Jitsi uses WebRTC peer-to-peer connections. If host and student join at different times, they don't discover each other. 
+.By reloading the host's iframe at the same time as the student enters, both join the Jitsi room at the same moment, Jitsi detects both peers, and the video connection is established automatically.
+.Student enters the meeting room 2 seconds after approval
+.Total time from approval to video: ~4 seconds
+
+##Step 7 — Inside the Meeting
+
+.Jitsi handles video/audio/screen share — all built in
+.Chat is stored in MongoDB, polled every 3 seconds
+.Participants list is polled every 5 seconds
+.Any teacher/HOD in the meeting can approve new join requests
+
+##Step 8 — End Meeting
+
+.Teacher clicks "End" → confirmation dialog
+.Backend marks meeting as ended, sets isActive = false
+.3-Layer clearing system removes meeting link from all class records:
+  Layer 1: Clear by classId
+  Layer 2: Clear by matching meetingLink URL
+  Layer 3: Clear by room code pattern (regex)
+.All students' dashboards show "Class Completed" within 5–10 seconds
+.Old meeting link becomes invalid — cannot be used again
+
+---
+
+## Functionalities:
 - Recognizes registered students
 - Marks attendance only when confidence threshold is met
 - Stores attendance locally and syncs to main system
